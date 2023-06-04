@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from "express"
 import cors from "cors"
 import { Configuration, OpenAIApi } from "openai"
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -12,6 +12,7 @@ app.use(cors())
 app.use(express.json())
 
 const API_KEY: string = process.env.API_KEY!;
+// console.log(API_KEY)
 
 const configuration = new Configuration({
     apiKey: API_KEY
@@ -25,7 +26,7 @@ app.post("/completions", async (req: Request, res: Response) => {
             model: "gpt-4",
             messages: [{
                 role: "user",
-                content: "Create a SQL request to" + req.body.message
+                content: "Create a SQL request to " + req.body.message
             }]
         })
         // sending the returned data from openai and picking first choice
